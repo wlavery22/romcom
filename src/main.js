@@ -13,6 +13,15 @@ var viewHomeView = document.querySelector('.home-view');
 var mainCover = document.querySelector('.main-cover');
 var viewSavedView = document.querySelector('.saved-view');
 var viewFormView = document.querySelector('.form-view');
+var createNewBookButton = document.querySelector('.create-new-book-button');
+
+//Part II
+var userCover = document.getElementById('cover');
+var userTitle = document.getElementById('title');
+var userDescriptor1 = document.getElementById('descriptor1');
+var userDescriptor2 = document.getElementById('descriptor2');
+
+
 // var createNewBookButton = document.querySelector('.create-new-book-button');
 
 // We've provided a few variables below
@@ -20,7 +29,7 @@ var savedCovers = [
   createCover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 
-var currentCover = createCover()
+var currentCover; /*= createCover()*/
 
 // Add your event listeners here 👇
 randomCoverButton.addEventListener('click', showRandomCover);
@@ -28,6 +37,14 @@ window.onload = showRandomCover();
 makeNewButton.addEventListener('click', displayForm);
 viewSavedButton.addEventListener('click', displaySavedCovers);
 homeButton.addEventListener('click', goToHome);
+createNewBookButton.addEventListener('click', function(e) {
+  e.preventDefault()
+  makeNewBook()
+  // pushUserCover()
+});
+
+
+
 window.addEventListener('load', function() {
   homeButton.classList.add('hidden');
 });
@@ -69,6 +86,43 @@ function goToHome() {
   viewSavedView.classList.add('hidden');
   homeButton.classList.add('hidden');
 }
+
+// // function makeNewBook() {
+
+// // var userCover = document.getElementById('cover');
+// // var userTitle = document.getElementById('title');
+// // var userDescriptor1 = document.getElementById('descriptor1');
+// // var userDescriptor2 = document.getElementById('descriptor2');
+
+//   // var color = colorInput.value;
+//   // box.style.backgroundColor = color;
+// }
+
+
+//PART II
+
+function makeNewBook() {
+  currentCover = createCover(userCover.value, userTitle.value, userDescriptor1.value, userDescriptor2.value);
+  bookCover.src = currentCover.coverImg; 
+  bookTitle.innerText = currentCover.title;
+  bookCaption1.innerText = currentCover.tagline1;
+  bookCaption2.innerText = currentCover.tagline2;
+
+  randomCoverButton.classList.remove('hidden');
+  saveCoverButton.classList.remove('hidden');
+  viewHomeView.classList.remove('hidden');
+  viewFormView.classList.add('hidden');
+  homeButton.classList.add('hidden');
+}
+  
+function pushUserCover() {
+  covers.push(userCover.value);
+  titles.push(userTitle.value);
+  descriptors.push(userDescriptor1.value);
+  descriptors.push(userDescriptor2.value);
+}
+
+
 //make querySelector to hide
 //each button will have a function
 
