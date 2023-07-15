@@ -28,6 +28,12 @@ window.onload = showRandomCover();
 makeNewButton.addEventListener('click', displayForm);
 viewSavedButton.addEventListener('click', displaySavedCovers);
 homeButton.addEventListener('click', goToHome);
+window.addEventListener('load', function() {
+  homeButton.classList.add('hidden');
+});
+
+
+
 // el.addEventListener("click", modifyText, false);
 // Create your event handlers and other functions here 👇
 
@@ -44,6 +50,7 @@ function displayForm() {
   saveCoverButton.classList.add('hidden');
   viewHomeView.classList.add('hidden');
   viewFormView.classList.remove('hidden');
+  homeButton.classList.remove('hidden');
 }
 function displaySavedCovers() {
   viewSavedView.classList.remove('hidden');
@@ -51,6 +58,7 @@ function displaySavedCovers() {
   randomCoverButton.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
   viewHomeView.classList.add('hidden');
+  homeButton.classList.remove('hidden');
   // viewFormView.classList.remove('hidden');
 }
 function goToHome() {
