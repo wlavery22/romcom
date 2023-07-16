@@ -14,7 +14,7 @@ var mainCover = document.querySelector('.main-cover');
 var viewSavedView = document.querySelector('.saved-view');
 var viewFormView = document.querySelector('.form-view');
 var createNewBookButton = document.querySelector('.create-new-book-button');
-
+var savedCoversSection = document.querySelector('.saved-covers-section'); 
 var userCover = document.getElementById('cover');
 var userTitle = document.getElementById('title');
 var userDescriptor1 = document.getElementById('descriptor1');
@@ -61,6 +61,7 @@ window.addEventListener('load', function() {
   homeButton.classList.add('hidden');
 });
 saveCoverButton.addEventListener('click', saveCover);
+// savedCoversSection.addEventListener('')
 
 // Create your event handlers and other functions here 👇
 
@@ -78,6 +79,7 @@ function displayForm() {
   viewFormView.classList.remove('hidden');
   homeButton.classList.remove('hidden');
 };
+
 function displaySavedCovers() {
   viewSavedView.classList.remove('hidden');
   viewFormView.classList.add('hidden');
@@ -85,7 +87,23 @@ function displaySavedCovers() {
   saveCoverButton.classList.add('hidden');
   viewHomeView.classList.add('hidden');
   homeButton.classList.remove('hidden');
-};
+  
+  var savedCoversGrid = `<section class='saved-view saved-covers-section'>`; 
+    for (var i = 0; i < savedCovers.length; i++) {
+      savedCoversGrid += `<section class='mini-cover mini-cover-icons'>
+      <img class='mini-cover' src='${savedCovers[i].coverImg}' id=${savedCovers[i].id} />
+      <h2 class='cover-title'>${savedCovers[i].title}</h2>
+      <h3 class='tagline'>
+      A tale of <span>${savedCovers[i].tagline1}</span> and
+      <span>${savedCovers[i].tagline2}</span>
+      </h3>
+      <img class='price-tag' src='./assets/price.png' />
+      <img class='overlay' src='./assets/overlay.png' />
+  </section>`;
+  }
+  savedCoversGrid += `</section>`; 
+  viewSavedView.innerHTML = savedCoversGrid;
+}
 
 var isDuplicate = false;
 
@@ -97,8 +115,8 @@ function saveCover() {
   }
     if (!isDuplicate)
       savedCovers.push(currentCover)
+      console.log(savedCovers);
     };
-
 
 function goToHome() {
   randomCoverButton.classList.remove('hidden');
@@ -131,4 +149,4 @@ function pushUserCover() {
   console.log(covers)
   console.log(titles)
   console.log(descriptors)
-};
+}
