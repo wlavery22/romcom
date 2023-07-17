@@ -19,21 +19,17 @@ var userCover = document.getElementById('cover');
 var userTitle = document.getElementById('title');
 var userDescriptor1 = document.getElementById('descriptor1');
 var userDescriptor2 = document.getElementById('descriptor2');
-
-//Part II
+var miniCoverIcons = document.querySelectorAll('.mini-cover-icons');
 
 // We've provided a few variables below
-var savedCovers = [
-  createCover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-];
-
-var currentCover; /*= createCover()*/
+var savedCovers = [];
+var currentCover; 
 
 // We've provided two functions to get you started
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
-}
+};
 
 function createCover(imgSrc, title, descriptor1, descriptor2) {
   var cover = {
@@ -44,7 +40,7 @@ function createCover(imgSrc, title, descriptor1, descriptor2) {
     tagline2: descriptor2
   }
   return cover
-}
+};
 
 // Add your event listeners here 👇
 randomCoverButton.addEventListener('click', showRandomCover);
@@ -61,7 +57,7 @@ window.addEventListener('load', function() {
   homeButton.classList.add('hidden');
 });
 saveCoverButton.addEventListener('click', saveCover);
-// savedCoversSection.addEventListener('')
+viewSavedView.addEventListener("dblclick", deleteSavedCover);
 
 // Create your event handlers and other functions here 👇
 
@@ -72,12 +68,24 @@ function showRandomCover() {
   bookCaption2.innerText = descriptors[getRandomIndex(descriptors)];
   currentCover = createCover(bookCover.src, bookTitle.innerText, bookCaption1.innerText, bookCaption2.innerText);
 };
+
+function goToHome() {
+  randomCoverButton.classList.remove('hidden');
+  saveCoverButton.classList.remove('hidden');
+  viewHomeView.classList.remove('hidden');
+  viewFormView.classList.add('hidden');
+  viewSavedView.classList.add('hidden');
+  homeButton.classList.add('hidden');
+  makeNewButton.classList.remove('hidden');
+};
+
 function displayForm() {
   randomCoverButton.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
   viewHomeView.classList.add('hidden');
   viewFormView.classList.remove('hidden');
   homeButton.classList.remove('hidden');
+  viewSavedView.classList.add('hidden');
 };
 
 function displaySavedCovers() {
@@ -87,6 +95,7 @@ function displaySavedCovers() {
   saveCoverButton.classList.add('hidden');
   viewHomeView.classList.add('hidden');
   homeButton.classList.remove('hidden');
+  makeNewButton.classList.remove('hidden');
   
   var savedCoversGrid = `<section class='saved-view saved-covers-section'>`; 
     for (var i = 0; i < savedCovers.length; i++) {
@@ -103,11 +112,10 @@ function displaySavedCovers() {
   }
   savedCoversGrid += `</section>`; 
   viewSavedView.innerHTML = savedCoversGrid;
-}
-
-var isDuplicate = false;
+};
 
 function saveCover() {
+  var isDuplicate = false;
   for (var i = 0; i < savedCovers.length; i++) {
     if (currentCover.id === savedCovers[i].id) {
       isDuplicate = true;
@@ -118,13 +126,12 @@ function saveCover() {
       console.log(savedCovers);
     };
 
-function goToHome() {
-  randomCoverButton.classList.remove('hidden');
-  saveCoverButton.classList.remove('hidden');
-  viewHomeView.classList.remove('hidden');
-  viewFormView.classList.add('hidden');
-  viewSavedView.classList.add('hidden');
-  homeButton.classList.add('hidden');
+function deleteSavedCover() {
+  for (var i = 0; i < savedCovers.length; i++) {
+    if (savedCovers[i].id == element.target.id) {
+      savedCovers.splice(i, 1);
+    }
+  }
 };
 
 function makeNewBook() {
@@ -149,4 +156,4 @@ function pushUserCover() {
   console.log(covers)
   console.log(titles)
   console.log(descriptors)
-}
+};
